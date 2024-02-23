@@ -1,0 +1,23 @@
+{
+  "enums": [
+    {
+      "package": "validation",
+      "type": "status",
+      "values": [
+        "Failed",
+        "Passed",
+        "Skipped",
+        "Scheduled",
+        "Running"
+      ]
+    },
+    {
+      "package": "validation",
+      "type": "level",
+      "values": [
+        "Starter",
+        "Pro"
+      ]
+    }
+  ]
+}

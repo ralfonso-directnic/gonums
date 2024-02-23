@@ -1,0 +1,80 @@
+package {{ .Package }}
+
+/*{{.Package}} was statically generated {{now}} by github.com/ralfonso-directnic/gonums, do not edit*/
+
+
+
+type {{ .TypeName }} int
+
+const (
+{{- range $index, $enum := .Enums }}
+    {{- if eq $index 0 }}
+    {{ .TypeName }}Unknown {{ .TypeName }} = iota
+    {{ .TypeName }}{{ $enum.VariableStrTitle }}
+    {{- else }}
+    {{ .TypeName }}{{ $enum.VariableStrTitle }}
+    {{- end }}
+{{- end }}
+)
+
+var (
+    str{{.TypeName}}Map = map[{{ .TypeName }}]string{
+{{- range $index, $enum := .Enums }}
+         {{ .TypeName }}{{ $enum.VariableStrTitle }}: "{{ $enum.VariableStr }}",
+{{- end }}
+    }
+
+    type{{.TypeName}}Map = map[string]{{ .TypeName}}{
+{{- range $index, $enum := .Enums }}
+         "{{ $enum.VariableStr }}": {{ .TypeName }}{{ $enum.VariableStrTitle }},
+{{- end }}
+    }
+)
+
+func (t {{ .TypeName }}) String() string {
+    return str{{.TypeName}}Map[t]
+}
+
+func (t {{ .TypeName }}) Int() int {
+    return int(t)
+}
+
+func (t {{ .TypeName }}) IsValid() bool {
+    _, ok := str{{.TypeName}}Map[t]
+    return ok
+}
+
+
+func  Parse{{ .TypeName }} (str string) {{ .TypeName }} {
+
+    if val,ok := type{{.TypeName}}Map[str]; ok {
+
+     return val
+
+    }
+
+    return {{ .TypeName }}Unknown
+
+}
+
+func  {{ .TypeName }}Strings() []string {
+
+    return []string{
+             "",
+    {{- range $index, $enum := .Enums }}
+             "{{ $enum.VariableStr }}",
+    {{- end }}
+    }
+
+}
+
+func  {{ .TypeName }}Collection() []{{ .TypeName }} {
+
+    return []{{ .TypeName }}{
+            {{ .TypeName }}Unknown,
+    {{- range $index, $enum := .Enums }}
+            {{ .TypeName }}{{ $enum.VariableStrTitle }},
+    {{- end }}
+    }
+
+}
