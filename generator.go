@@ -4,6 +4,7 @@ import (
 	"embed"
 	_ "embed"
 	"fmt"
+	"regexp"
 	"os"
 	"time"
 	"os/exec"
@@ -76,12 +77,18 @@ func generateEnum(etd EnumTemplateData, outPath string) error {
 		},
 	}
 
+	cmdA := exec.Command("go", "clean")
+	err = cmdA.Run()
+	if err != nil {
+		return err
+	}
 
 	t := template.Must(template.New("enum.tmpl").Funcs(funcMap).ParseFS(fs, "template/enum.tmpl"))
 	err = t.Execute(f, etd)
 	if err != nil {
 		return err
 	}
+
 	cmd := exec.Command("gofmt", "-w", fp)
 	err = cmd.Run()
 	if err != nil {
@@ -120,12 +127,12 @@ func configToVars(cfg EnumConfig) (string, string, []Enum) {
 	enums := make([]Enum, len(enumStrs))
 	c := cases.Title(language.English)
 	typeTitle := c.String(typ)
+	re := regexp.MustCompile("[^A-Za-z0-9]")
 	for i, enumStr := range enumStrs {
-		opU := strings.ReplaceAll(enumStr, " ", "_")
-		op := strings.ReplaceAll(enumStr, " ", "")
+		op:= re.ReplaceAllString(enumStr, "")
 		enums[i] = Enum{
-			VariableStr:      op,
-			VariableStrUpper: strings.ToUpper(opU),
+			VariableStr:      enumStr,
+			VariableStrUpper: strings.ToUpper(op),
 			VariableStrLower: strings.ToLower(op),
 			VariableStrTitle: c.String(op),
 			TypeName:         typeTitle,

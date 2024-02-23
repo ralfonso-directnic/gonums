@@ -1,10 +1,12 @@
 {
   "enums": [
     {
-      "package": "validation",
+      "package": "validation2",
       "type": "status",
       "values": [
         "Failed",
+        "Test Entry",
+        "In-Active",
         "Passed",
         "Skipped",
         "Scheduled",
@@ -12,7 +14,7 @@
       ]
     },
     {
-      "package": "validation",
+      "package": "validation2",
       "type": "level",
       "values": [
         "Starter",
