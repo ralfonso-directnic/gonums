@@ -101,7 +101,7 @@ func parseConfig(cfg Config) []EnumTemplateData {
 	data := make([]EnumTemplateData, len(cfg.Configs))
 	for i, c := range cfg.Configs {
 		typeName, packageName, enums := configToVars(c)
-		c := cases.Title(language.English)
+		c := cases.Title(language.English, cases.NoLower)
 		typeNameTitle := c.String(typeName)
 		typeNamePlural := typeNameTitle + "s"
 		if typeNameTitle[len(typeNameTitle)-1] == 's' {
@@ -125,7 +125,7 @@ func configToVars(cfg EnumConfig) (string, string, []Enum) {
 	pkg := cfg.Package
 	enumStrs := cfg.Enums
 	enums := make([]Enum, len(enumStrs))
-	c := cases.Title(language.English)
+	c := cases.Title(language.English, cases.NoLower)
 	typeTitle := c.String(typ)
 	re := regexp.MustCompile("[^A-Za-z0-9]")
 	for i, enumStr := range enumStrs {

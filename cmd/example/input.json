@@ -15,7 +15,7 @@
     },
     {
       "package": "validation2",
-      "type": "level",
+      "type": "ActivityLevel",
       "values": [
         "Starter",
         "Pro"
