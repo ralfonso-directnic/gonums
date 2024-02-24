@@ -29,6 +29,7 @@ type EnumTemplateData struct {
 
 type Enum struct {
 	VariableStr      string
+	VariableLabel    string
 	VariableStrUpper string
 	VariableStrLower string
 	VariableStrTitle string
@@ -129,9 +130,25 @@ func configToVars(cfg EnumConfig) (string, string, []Enum) {
 	typeTitle := c.String(typ)
 	re := regexp.MustCompile("[^A-Za-z0-9]")
 	for i, enumStr := range enumStrs {
+		enumLabel := enumStr
+		if strings.Contains(enumStr,":") {
+
+			parts := strings.Split(enumStr,":")
+
+			if len(parts)>1{
+
+				enumStr   = parts[0]
+				enumLabel = strings.Trim(parts[1]," ")
+
+			}
+
+		}
+
 		op:= re.ReplaceAllString(enumStr, "")
+
 		enums[i] = Enum{
 			VariableStr:      enumStr,
+			VariableLabel:    enumLabel,
 			VariableStrUpper: strings.ToUpper(op),
 			VariableStrLower: strings.ToLower(op),
 			VariableStrTitle: c.String(op),

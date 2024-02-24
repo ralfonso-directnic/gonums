@@ -16,7 +16,7 @@ input.json:
       "package": "validation",
       "type": "status",
       "values": [
-        "Failed",
+        "Failed: Failed State Label",
         "Passed",
         "Skipped",
         "Scheduled",
@@ -26,6 +26,8 @@ input.json:
   ]
 }
 ```
+
+Note above, if you have a colon, you will create a enum constant with the first segment and label with the second.
 
 ```golang
 package validation
@@ -45,7 +47,7 @@ const (
 
 var (
 	strStatusMap = map[Status]string{
-		StatusFailed:    "Failed",
+		StatusFailed:    "Failed State Label",
 		StatusPassed:    "Passed",
 		StatusSkipped:   "Skipped",
 		StatusScheduled: "Scheduled",
@@ -90,7 +92,7 @@ func StatusStrings() []string {
 
 	return []string{
 		"",
-		"Failed",
+		"Failed State Label",
 		"Passed",
 		"Skipped",
 		"Scheduled",

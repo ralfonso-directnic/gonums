@@ -1,24 +1,16 @@
 {
   "enums": [
     {
-      "package": "validation2",
+      "package": "validation4",
       "type": "status",
       "values": [
-        "Failed",
+        "Failed: It's my label here",
         "Test Entry",
         "In-Active",
         "Passed",
         "Skipped",
         "Scheduled",
         "Running"
-      ]
-    },
-    {
-      "package": "validation2",
-      "type": "ActivityLevel",
-      "values": [
-        "Starter",
-        "Pro"
       ]
     }
   ]

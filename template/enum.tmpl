@@ -20,13 +20,13 @@ const (
 var (
     str{{.TypeName}}Map = map[{{ .TypeName }}]string{
 {{- range $index, $enum := .Enums }}
-         {{ .TypeName }}{{ $enum.VariableStrTitle }}: "{{ $enum.VariableStr }}",
+         {{ .TypeName }}{{ $enum.VariableStrTitle }}: "{{ $enum.VariableLabel }}",
 {{- end }}
     }
 
     type{{.TypeName}}Map = map[string]{{ .TypeName}}{
 {{- range $index, $enum := .Enums }}
-         "{{ $enum.VariableStr }}": {{ .TypeName }}{{ $enum.VariableStrTitle }},
+         "{{ $enum.VariableLabel }}": {{ .TypeName }}{{ $enum.VariableStrTitle }},
 {{- end }}
     }
 )
@@ -62,7 +62,7 @@ func  {{ .TypeName }}Strings() []string {
     return []string{
              "",
     {{- range $index, $enum := .Enums }}
-             "{{ $enum.VariableStr }}",
+             "{{ $enum.VariableLabel }}",
     {{- end }}
     }
 
