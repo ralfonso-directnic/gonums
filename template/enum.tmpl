@@ -26,7 +26,7 @@ var (
 
     type{{.TypeName}}Map = map[string]{{ .TypeName}}{
 {{- range $index, $enum := .Enums }}
-         "{{ $enum.VariableLabel }}": {{ .TypeName }}{{ $enum.VariableStrTitle }},
+         "{{ $enum.VariableStr }}": {{ .TypeName }}{{ $enum.VariableStrTitle }},
 {{- end }}
     }
 )

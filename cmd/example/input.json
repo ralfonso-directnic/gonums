@@ -1,12 +1,13 @@
 {
   "enums": [
     {
-      "package": "validation4",
+      "package": "validation5",
       "type": "status",
       "values": [
         "Failed: It's my label here",
         "Test Entry",
-        "In-Active",
+        "In-Active2:inactive",
+        "In-Active:inactive",
         "Passed",
         "Skipped",
         "Scheduled",
